@@ -9,26 +9,55 @@ export default function Navbar() {
     }
 
     return (
-        <nav className={`w-full ${dark ? "text-black" : "text-white"} px-6 py-4 shadow-xl flex items-center justify-between backdrop-blur-lg ${dark ? "bg-[#FCF5EE]" : " bg-gray-900/80"}`}>
-            <div className="text-4xl font-bold tracking-wide"><Link to="/">Book Management</Link></div>
+        <nav
+            className={`w-full px-8 py-5 flex items-center justify-between 
+            backdrop-blur-xl shadow-2xl transition-all duration-300
+            ${dark ? "bg-[#FCF5EE] text-gray-900" : "bg-gray-900/80 text-white"}`}
+        >
+            <div className="text-3xl font-extrabold tracking-wide">
+                <Link
+                    to="/"
+                    className="bg-gradient-to-r from-pink-500 to-orange-400 bg-clip-text text-transparent hover:opacity-90 transition"
+                >
+                    Book Management
+                </Link>
+            </div>
 
-            <ul className="md:flex gap-8 text-lg items-center">
-                <li className={`${dark ? "hover:text-[#EE6983]" : "hover:text-gray-300"} transition-colors cursor-pointer`}><Link to="/">Home</Link></li>
+            <ul className="flex gap-10 text-lg items-center font-medium">
+                {["/", "/About", "/Contact", "/AddBooks"].map((path, i) => (
+                    <li key={i}>
+                        <Link
+                            to={path}
+                            className={`relative transition-all duration-300
+                            ${dark ? "hover:text-[#EE6983]" : "hover:text-gray-300"}
+                            after:absolute after:left-0 after:-bottom-1 after:h-[2px]
+                            after:w-0 after:bg-current after:transition-all after:duration-300
+                            hover:after:w-full`}
+                        >
+                            {path === "/" ? "Home" : path.replace("/", "")}
+                        </Link>
+                    </li>
+                ))}
 
-                
-                <li className={`${dark ? "hover:text-[#EE6983]" : "hover:text-gray-300"} transition-colors cursor-pointer`}><Link to="/About">About</Link></li>
+                <Link
+                    to="/Login"
+                    className={`px-5 py-2 rounded-full border transition-all duration-300
+                    ${dark ? "border-gray-800 hover:bg-[#EE6983] hover:text-white" : "border-white hover:bg-white hover:text-gray-900"}
+                    hover:shadow-lg`}
+                >
+                    Login
+                </Link>
 
-
-                <li className={`${dark ? "hover:text-[#EE6983]" : "hover:text-gray-300"} transition-colors cursor-pointer`}><Link to="/Contact">Contact</Link></li>
-
-
-                <li className={`${dark ? "hover:text-[#EE6983]" : "hover:text-gray-300"} transition-colors cursor-pointer`}><Link to="/AddBooks">Add Books</Link></li>
-
-
-                <button className={`${dark ? "hover:text-[#EE6983]" : "hover:text-gray-300"} transition-colors cursor-pointer`}><Link to="/Login" className={`border ${dark ? "border-dark" : "border-white"} rounded-2xl p-2 leading-2`}>Login</Link></button>
-
-
-                <button onClick={handleClick} className={`border ${dark ? "border-black" : "border-white"} ${dark ? "hover:text-[#EE6983]" : "hover:text-gray-300"} rounded-2xl p-2`}>{dark ? "Enable Dark Mode" : "Enable Ligth Mode"}</button>
+                <button
+                    onClick={handleClick}
+                    className={`px-5 py-2 rounded-full border transition-all duration-300
+                    ${dark
+                        ? "border-gray-800 hover:bg-gray-900 hover:text-white"
+                        : "border-white hover:bg-white hover:text-gray-900"}
+                    hover:shadow-lg active:scale-95`}
+                >
+                    {dark ? "Enable Dark Mode" : "Enable Light Mode"}
+                </button>
             </ul>
         </nav>
     );
